@@ -1,3 +1,7 @@
+DROP DATABASE POS;
+CREATE DATABASE POS;
+USE POS;
+
 CREATE TABLE `products` (
 	`id` bigint NOT NULL AUTO_INCREMENT,
 	`name` varchar(255) NOT NULL,
@@ -97,7 +101,7 @@ CREATE TABLE `shipping_type` (
 );
 
 CREATE TABLE `product_category` (
-	`id` int NOT NULL AUTO_INCREMENT,
+	`id` bigint NOT NULL AUTO_INCREMENT,
 	`name` bigint NOT NULL UNIQUE,
 	PRIMARY KEY (`id`)
 );
