@@ -44,6 +44,7 @@ CREATE TABLE `sell` (
 	`id` bigint NOT NULL AUTO_INCREMENT,
 	`product_id` bigint NOT NULL,
 	`quantity` bigint NOT NULL,
+	`discount` bigint,
 	PRIMARY KEY (`id`)
 );
 
@@ -55,6 +56,7 @@ CREATE TABLE `sell_invoice` (
 	`time` DATETIME NOT NULL,
 	`shipping_type_id` int NOT NULL,
 	`shipping_cost` bigint,
+	`discount` bigint,
 	PRIMARY KEY (`id`)
 );
 
@@ -64,6 +66,7 @@ CREATE TABLE `buy_invoice` (
 	`buy_id` bigint NOT NULL,
 	`time` DATETIME NOT NULL,
 	`order_type_id` int NOT NULL,
+	`discount` bigint,
 	PRIMARY KEY (`id`)
 );
 
@@ -72,6 +75,7 @@ CREATE TABLE `buy` (
 	`product_id` bigint NOT NULL,
 	`quantity` bigint NOT NULL,
 	`price_per_unit` bigint,
+	`discount` bigint,
 	PRIMARY KEY (`id`)
 );
 
@@ -129,15 +133,4 @@ ALTER TABLE `buy_invoice` ADD CONSTRAINT `buy_invoice_fk1` FOREIGN KEY (`buy_id`
 ALTER TABLE `buy_invoice` ADD CONSTRAINT `buy_invoice_fk2` FOREIGN KEY (`order_type_id`) REFERENCES `order_type`(`id`);
 
 ALTER TABLE `buy` ADD CONSTRAINT `buy_fk0` FOREIGN KEY (`product_id`) REFERENCES `products`(`id`);
-
-
-
-
-
-
-
-
-
-
-
 
