@@ -32,6 +32,12 @@ def Edit_Row(Table, conidtion_column, condition, target_column, variable):
         if err.errno == 1062: 
             return 'This is a redundant information'
 
+def Delete_Row(Table, conidtion_column, condition):
+    
+    cursor.execute('DELETE FROM %s WHERE %s = \'%s\';' % (Table, conidtion_column, condition))
+    cnx.commit()
+    return 'Successfully deleted the row where %s = %s' %(conidtion_column, condition)
+
 ############# Main ##################
 
 cnx = mysql.connector.connect(user='root', password='harchi', host='127.0.0.1', database='pos')
@@ -45,3 +51,4 @@ target_column = 'name'
 variable = 'بسته تک عددی'
 #print(Insert_Auto_Increment(Table, List))
 #print(Edit_Row(Table, conidtion_column, condition, target_column, variable))
+#print(Delete_Row(Table, conidtion_column, condition))
