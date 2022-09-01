@@ -55,7 +55,7 @@ class SQL_Control:
 
 ############# Main ##################
 
-SQL = SQL_Control('root', 'harchi', '127.0.0.1', 'pos')
+#SQL = SQL_Control('root', 'harchi', '127.0.0.1', 'pos')
 
 Table = 'unit_of_measure'
 List = ['مثقال']
