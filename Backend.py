@@ -45,6 +45,13 @@ class SQL_Control:
         self.cnx.commit()
         return 'Successfully deleted the row where %s = %s' %(conidtion_column, condition)
 
+    def Show_All_Rows_of_Table(self, Table):
+        
+        query = 'SELECT * FROM %s;' %Table
+        df = pd.read_sql(query, self.cnx)
+        df.sort_values(by=['id'], inplace=True)
+        
+        return df.to_dict('records')
 
 ############# Main ##################
 
@@ -56,6 +63,8 @@ conidtion_column = 'id'
 condition = '4'
 target_column = 'name'
 variable = 'بسته تک عددی'
+
 #print(SQL.Insert_Auto_Increment(Table, List))
 #print(SQL.Edit_Row(Table, conidtion_column, condition, target_column, variable))
 #print(SQL.Delete_Row(Table, conidtion_column, condition))
+#print(SQL.Show_All_Rows_of_Table(Table))
