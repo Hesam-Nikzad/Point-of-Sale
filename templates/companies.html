@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div style = 'text-align:center;'> 
+
+    <h1> فروشندگان</h1><br/><br/><br/>
+
+</div>
+
+<div style="direction:rtl;text-align:right;">
+
+
+        <form method = 'POST'>
+            {{ form.hidden_tag() }}
+
+            {{ form.name.label}}
+            {{ form.name() }} &nbsp&nbsp&nbsp
+
+            {{ form.phone.label}}
+            {{ form.phone() }} &nbsp&nbsp&nbsp
+
+            {{ form.mobile.label}}
+            {{ form.mobile() }} &nbsp&nbsp&nbsp
+
+            {{ form.province.label}}
+            {{ form.province() }} &nbsp&nbsp&nbsp  <br/><br/>
+
+            {{ form.city.label}}
+            {{ form.city() }} &nbsp&nbsp&nbsp
+
+            {{ form.address.label}}
+            {{ form.address() }} &nbsp&nbsp&nbsp
+            
+            &nbsp&nbsp&nbsp
+            {{ form.submit() }}
+
+        </form>
+
+
+</div>
+
+{% endblock %}
