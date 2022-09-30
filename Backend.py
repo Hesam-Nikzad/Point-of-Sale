@@ -57,12 +57,12 @@ class SQL_Control:
 
 #SQL = SQL_Control('root', 'harchi', '127.0.0.1', 'pos')
 
-Table = 'unit_of_measure'
-List = ['مثقال']
-conidtion_column = 'id'
-condition = '4'
-target_column = 'name'
-variable = 'بسته تک عددی'
+#Table = 'company'
+#List = ['مثقال']
+#conidtion_column = 'id'
+#condition = '4'
+#target_column = 'name'
+#variable = 'بسته تک عددی'
 
 #print(SQL.Insert_Auto_Increment(Table, List))
 #print(SQL.Edit_Row(Table, conidtion_column, condition, target_column, variable))
