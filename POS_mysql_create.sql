@@ -1,7 +1,7 @@
-DROP DATABASE POS;
-CREATE DATABASE POS;
+#DROP DATABASE POS;
+#CREATE DATABASE POS;
 USE POS;
-#SELECT * FROM unit_of_measure;
+#SELECT * FROM company;
 CREATE TABLE `products` (
 	`id` bigint NOT NULL AUTO_INCREMENT,
 	`name` varchar(255) NOT NULL,
@@ -60,6 +60,7 @@ CREATE TABLE `buy_invoice` (
 	`time` DATETIME NOT NULL,
 	`order_type_id` int NOT NULL,
 	`discount` bigint,
+	`official_invoice_id` varchar(255),
 	PRIMARY KEY (`id`)
 );
 
@@ -74,10 +75,9 @@ CREATE TABLE `buy` (
 
 CREATE TABLE `company` (
 	`id` bigint NOT NULL AUTO_INCREMENT,
-	`name` varchar(255) NOT NULL,
+	`name` varchar(255) NOT NULL UNIQUE,
 	`phone` varchar(255) NOT NULL,
 	`mobile` varchar(255),
-	`official_invoice_id` varchar(255),
 	`address` varchar(255),
 	`city` varchar(255),
 	`province` varchar(255),
@@ -124,4 +124,5 @@ ALTER TABLE `buy_invoice` ADD CONSTRAINT `buy_invoice_fk1` FOREIGN KEY (`buy_id`
 ALTER TABLE `buy_invoice` ADD CONSTRAINT `buy_invoice_fk2` FOREIGN KEY (`order_type_id`) REFERENCES `order_type`(`id`);
 
 ALTER TABLE `buy` ADD CONSTRAINT `buy_fk0` FOREIGN KEY (`product_id`) REFERENCES `products`(`id`);
+
 
