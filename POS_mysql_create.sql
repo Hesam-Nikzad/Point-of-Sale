@@ -1,13 +1,12 @@
 DROP DATABASE POS;
 CREATE DATABASE POS;
 USE POS;
-
+#SELECT * FROM unit_of_measure;
 CREATE TABLE `products` (
 	`id` bigint NOT NULL AUTO_INCREMENT,
 	`name` varchar(255) NOT NULL,
 	`description` varchar(255),
 	`price_per_unit` bigint NOT NULL,
-	`unit_of_measure_id` int NOT NULL,
 	`company_id` bigint,
 	`barcode` varchar(255),
 	`category_id` bigint NOT NULL,
@@ -31,12 +30,6 @@ CREATE TABLE `customer` (
 	`occupation` varchar(255),
 	`contract_type` varchar(255),
 	`customer_type` varchar(255),
-	PRIMARY KEY (`id`)
-);
-
-CREATE TABLE `unit_of_measure` (
-	`id` int NOT NULL AUTO_INCREMENT,
-	`name` varchar(255) NOT NULL UNIQUE,
 	PRIMARY KEY (`id`)
 );
 
@@ -110,11 +103,9 @@ CREATE TABLE `product_category` (
 	PRIMARY KEY (`id`)
 );
 
-ALTER TABLE `products` ADD CONSTRAINT `products_fk0` FOREIGN KEY (`unit_of_measure_id`) REFERENCES `unit_of_measure`(`id`);
+ALTER TABLE `products` ADD CONSTRAINT `products_fk0` FOREIGN KEY (`company_id`) REFERENCES `company`(`id`);
 
-ALTER TABLE `products` ADD CONSTRAINT `products_fk1` FOREIGN KEY (`company_id`) REFERENCES `company`(`id`);
-
-ALTER TABLE `products` ADD CONSTRAINT `products_fk2` FOREIGN KEY (`category_id`) REFERENCES `product_category`(`id`);
+ALTER TABLE `products` ADD CONSTRAINT `products_fk1` FOREIGN KEY (`category_id`) REFERENCES `product_category`(`id`);
 
 ALTER TABLE `sell` ADD CONSTRAINT `sell_fk0` FOREIGN KEY (`product_id`) REFERENCES `products`(`id`);
 
