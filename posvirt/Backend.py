@@ -13,14 +13,14 @@ class SQL_Control:
 
     def Insert_Auto_Increment(self, Table, List):
 
-        query = 'SELECT * FROM %s;' %Table
-        unit_of_measure_df = pd.read_sql(query, self.cnx)
-        id = len(unit_of_measure_df) + 1
-        List.insert(0, id)
+        query = 'SHOW COLUMNS FROM %s;' %Table
+        fields = pd.read_sql(query, self.cnx).Field.to_list()[1:]
+        string_fields = ','.join(fields)
 
         format_strings = ','.join(['%s'] * len(List))
+        
         try: 
-            self.cursor.execute('INSERT INTO %s VALUES (%s)' % (Table, format_strings), tuple(List))
+            self.cursor.execute('INSERT INTO %s (%s) VALUES (%s)' % (Table, string_fields, format_strings), tuple(List))
             self.cnx.commit()
             return 'Successfully added to the table %s' %Table
 
@@ -53,12 +53,21 @@ class SQL_Control:
         
         return df.to_dict('records')
 
+    def Search(self, Table, search_column, text):
+
+        query = 'SELECT * FROM %s WHERE %s LIKE \'%%%s%%\';' % (Table, search_column, text)
+        print(query)
+        df = pd.read_sql(query, self.cnx)
+        df.sort_values(by=['id'], inplace=True)
+        
+        return df.to_dict('records')
+
 ############# Main ##################
 
-#SQL = SQL_Control('root', 'harchi', '127.0.0.1', 'pos')
+SQL = SQL_Control('root', 'harchi', '127.0.0.1', 'pos')
 
 #Table = 'company'
-#List = ['مثقال']
+#List = ['جعفر', 9111285283, None, None, None, None]
 #conidtion_column = 'id'
 #condition = '4'
 #target_column = 'name'
@@ -68,3 +77,4 @@ class SQL_Control:
 #print(SQL.Edit_Row(Table, conidtion_column, condition, target_column, variable))
 #print(SQL.Delete_Row(Table, conidtion_column, condition))
 #print(SQL.Show_All_Rows_of_Table(Table))
+#print(SQL.Search('company', 'name', 'ا'))
