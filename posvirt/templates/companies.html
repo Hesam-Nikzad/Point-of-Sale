@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div style = 'text-align:center;'> 
+
+    <h1> تامین کننده‌ها </h1><br/><br/><br/>
+
+</div>
+
+
+{% for message in get_flashed_messages() %}
+
+<div class="alert alert-primary alert-dismissible fade show" role="alert" style = 'direction:rtl;text-align:center;'>
+    {{ name }} {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+
+{% endfor %}
+
+
+<div style="direction:rtl;text-align:right;">
+
+
+    <form class="row g-3" method = 'POST'>
+        {{ form.hidden_tag() }}
+        
+        <div class="col-md-4">
+            {{ form.name(class="form-control", placeholder="اسم فروشنده یا شرکت") }} 
+        </div>
+
+        <div class="col-md-4">
+            {{ form.phone(class="form-control", placeholder="تلفن") }}
+        </div>
+
+        <div class="col-md-4">
+            {{ form.mobile(class="form-control", placeholder="موبایل") }}
+        </div>
+
+        <div class="col-md-4">
+            {{ form.province(class="form-control", placeholder="استان") }} 
+        </div>
+
+        <div class="col-md-4">
+            {{ form.city(class="form-control", placeholder="شهر") }}
+        </div>
+
+        <div class="col-md-4">
+            {{ form.address(class="form-control", placeholder="آدرس") }}
+        </div>
+            
+        <div class="d-grid gap-2 col-3">
+            {{ form.submit_add(class="btn btn-success btn-lg") }}
+        </div>
+
+        <div class="d-grid gap-2 col-3">
+            {{ form.submit_search(class="btn btn-warning btn-lg") }}
+        </div>
+
+        <div class="d-grid gap-2 col-3">
+            {{ form.submit_edit(class="btn btn-primary btn-lg") }}
+        </div>
+
+        <div class="d-grid gap-2 col-3">
+            {{ form.submit_del(class="btn btn-danger btn-lg") }}
+        </div>
+
+    </form>
+
+    <br/><br/><br/><br/>
+
+    <table class="table table-striped-columns">
+        
+        <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">نام</th>
+              <th scope="col">تلفن</th>
+              <th scope="col">موبایل</th>
+              <th scope="col">استان</th>
+              <th scope="col">شهر</th>
+              <th scope="col">آدرس</th>
+            </tr>
+          </thead>
+
+    {% for company in companies %}
+    <tbody>
+    <TR>
+
+        <th scope="row"> {{ company.id }} </th>
+        <TD class="c2"> {{ company.name }} </TD>
+        <TD class="c3"> {{ company.phone }} </TD>
+        <TD class="c4"> {{ company.mobile }} </TD>
+        <TD class="c5"> {{ company.province }} </TD>
+        <TD class="c6"> {{ company.city }} </TD>
+        <TD class="c7"> {{ company.address }} </TD>
+
+    </TR>
+    </tbody>
+    {% endfor %}
+    </table>
+
+</div>
+
+{% endblock %}
